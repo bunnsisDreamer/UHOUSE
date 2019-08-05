@@ -1,17 +1,14 @@
-package com.cqupt.mislab.uhouse.controller;
+package com.cqupt.mislab.uhouse.controller.User;
 
 import com.cqupt.mislab.uhouse.common.response.ResponseEntity;
 import com.cqupt.mislab.uhouse.constant.Message;
 import com.cqupt.mislab.uhouse.constant.ReturnCode;
-import com.cqupt.mislab.uhouse.model.user.User;
+import com.cqupt.mislab.uhouse.model.User.User;
 import com.cqupt.mislab.uhouse.service.User.UserService;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
-import javafx.geometry.Pos;
-import org.omg.PortableServer.POA;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -22,8 +19,6 @@ public class UserController {
 
     @Autowired
     private UserService userService;
-
-
     /*
     * @ApiOperation和@ApiImplicitParams为Swagger的注解
     * */
@@ -52,7 +47,7 @@ public class UserController {
                     @ApiImplicitParam(name = "password",value = "账号密码",required = true,paramType = "query")
             }
     )
-    @PostMapping("/update}")
+    @PostMapping("/update")
     public ResponseEntity<Object> updateUser(User user) {
         boolean flag = userService.updateUser(user);
         if (flag)

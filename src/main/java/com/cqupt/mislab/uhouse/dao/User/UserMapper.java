@@ -1,6 +1,6 @@
-package com.cqupt.mislab.uhouse.dao;
+package com.cqupt.mislab.uhouse.dao.User;
 
-import com.cqupt.mislab.uhouse.model.user.User;
+import com.cqupt.mislab.uhouse.model.User.User;
 import org.springframework.stereotype.Repository;
 
 

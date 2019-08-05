@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-/mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cqupt.mislab.uhouse.dao.Brand.Introduction.IntroductionMapper">
+
+    <resultMap id="introductionGet" type="com.cqupt.mislab.uhouse.model.Brand.Introduction.IntroductionGet">
+        <id column="project_id" property="projectId"/>
+        <result column="name" property="name"/>
+        <result column="description" property="description"/>
+        <result column="videoUrl" property="videoUrl"/>
+    </resultMap>
+    <sql id="brand_intro_get_columns">
+        project_id,name,description,videoUrl
+    </sql>
+
+    <select id="findTextByProjectId" parameterType="java.lang.Integer" resultMap="introductionGet">
+        select *
+        from brand_intro
+        where project_id=#{projectId}
+    </select>
+
+
+    <resultMap id="introductionImageGet" type="com.cqupt.mislab.uhouse.model.Brand.Introduction.IntroductionImageGet">
+        <id column="project_id" property="projectId"/>
+        <result column="picture_id" property="pictureId"/>
+        <result column="picture_description" property="pictureDescription"/>
+        <result column="url" property="url"/>
+    </resultMap>
+    <sql id="brand_intro_image_get_columns">
+        project_id,picture_id,picture_description,url
+    </sql>
+
+    <select id="findImageByProjectId" parameterType="java.lang.Integer" resultMap="introductionImageGet">
+        select picture_id,picture_description,url
+        from intro_picture
+        where intro_picture.intro_id=(select brand_intro.intro_id from brand_intro where project_id=#{projectId} )
+    </select>
+
+    <update id="updateText" parameterType="com.cqupt.mislab.uhouse.model.Brand.Introduction.IntroductionGet">
+        update brand_intro
+        set name=#{name},description=#{description},videoUrl=#{videoUrl}
+        where project_id=#{projectId}
+    </update>
+
+    <insert id="addImage" parameterType="com.cqupt.mislab.uhouse.model.Brand.Introduction.IntroductionImageAdd" keyProperty="pictureId" useGeneratedKeys="true" >
+        insert into intro_picture (intro_id,picture_description,url)
+        values ((select intro_id from brand_intro where project_id=#{projectId}),#{pictureDescription},#{url})
+    </insert>
+
+    <delete id="deleteImage" parameterType="com.cqupt.mislab.uhouse.model.Brand.Introduction.IntroductionImageGet">
+        delete
+        from intro_picture
+        where picture_id=#{pictureId}
+    </delete>
+
+</mapper>

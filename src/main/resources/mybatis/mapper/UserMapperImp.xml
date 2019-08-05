@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.cqupt.mislab.uhouse.dao.UserMapper">
-    <resultMap id="user" type="com.cqupt.mislab.uhouse.model.user.User">
+<mapper namespace="com.cqupt.mislab.uhouse.dao.User.UserMapper">
+    <resultMap id="user" type="com.cqupt.mislab.uhouse.model.User.User">
         <id column="userid" property="userId"/>
         <result column="username" property="userName"/>
         <result column="password" property="password"/>
@@ -11,16 +11,17 @@
     </sql>
     <select id="findUserByUserName" parameterType="java.lang.String" resultMap="user">
         select *
-        from userinfo
+        from user
         where username=#{userName}
     </select>
-    <update id="updateUser" parameterType="com.cqupt.mislab.uhouse.model.user.User">
-        update userinfo
+    <update id="updateUser" parameterType="com.cqupt.mislab.uhouse.model.User.User">
+        update user
         set password=#{password}
         where userid=#{userId}
     </update>
-    <insert id="adduser" parameterType="com.cqupt.mislab.uhouse.model.user.User"  keyProperty="userId" useGeneratedKeys="true" >
-      insert into userinfo(username,password)
+    <insert id="adduser" parameterType="com.cqupt.mislab.uhouse.model.User.User" keyProperty="userId" useGeneratedKeys="true" >
+      insert into user(username,password)
         VALUES (#{userName},#{password})
     </insert>
 </mapper>
+
