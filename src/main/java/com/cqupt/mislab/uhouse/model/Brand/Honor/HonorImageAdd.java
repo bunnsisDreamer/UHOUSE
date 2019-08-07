@@ -3,7 +3,7 @@ package com.cqupt.mislab.uhouse.model.Brand.Honor;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import io.swagger.annotations.ApiParam;
 
-@JsonIgnoreProperties(value = {"honorId","projectId"})
+@JsonIgnoreProperties(value = {"honorId","projectId","pictureDescription","url"})
 public class HonorImageAdd {
     @ApiParam(hidden = true)
     private int honorId;

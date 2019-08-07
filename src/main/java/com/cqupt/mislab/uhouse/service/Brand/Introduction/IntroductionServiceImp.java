@@ -26,14 +26,14 @@ public class IntroductionServiceImp implements IntroductionService{
 
     @Override
     public boolean updateText(IntroductionGet introductionGet){
-        introductionMapper.updateText(introductionGet);
-        return true;
+        return introductionMapper.updateText(introductionGet);
+
     }
 
     @Override
     public boolean deleteImage(IntroductionImageGet introductionImageGet){
-        introductionMapper.deleteImage(introductionImageGet);
-        return true;
+        return introductionMapper.deleteImage(introductionImageGet);
+
     }
 
     @Override

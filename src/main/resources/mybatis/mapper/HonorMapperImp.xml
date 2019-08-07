@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-/mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cqupt.mislab.uhouse.dao.Brand.Honor.HonorMapper">
+    
+    <resultMap id="honorGet" type="com.cqupt.mislab.uhouse.model.Brand.Honor.HonorGet">
+        <id column="project_id" property="projectId"/>
+        <result column="honor_id" property="honorId"/>
+        <result column="info_id" property="infoId"/>
+        <result column="honor_info" property="honorInfo"/>
+    </resultMap>
+    <sql id="brand_honor_get_columns">
+        project_id,honor_id,honor_info
+    </sql>
+
+    <select id="findTextByProjectId" parameterType="java.lang.Integer" resultMap="honorGet">
+        select info_id,honor_id,honor_info
+        from honor_info
+        where project_id=#{projectId}
+    </select>
+
+    <resultMap id="honorImageGet" type="com.cqupt.mislab.uhouse.model.Brand.Honor.HonorImageGet">
+        <result column="honor_id" property="honorId"/>
+        <result column="picture_id" property="pictureId"/>
+        <result column="picture_description" property="pictureDescription"/>
+        <result column="url" property="url"/>
+    </resultMap>
+    <sql id="brand_honor_get_image_columns">
+        picture_id,honor_id,picture_description,url
+    </sql>
+
+    <select id="getImageByProjectId" parameterType="java.lang.Integer" resultMap="honorImageGet">
+        select picture_id,picture_description,url
+        from honor_picture
+        where honor_picture.honor_id=(select brand_honor.honor_id from brand_honor where project_id=#{projectId})
+    </select>
+
+    <insert id="addText" parameterType="com.cqupt.mislab.uhouse.model.Brand.Honor.HonorAdd" keyProperty="infoId" useGeneratedKeys="true">
+        insert into honor_info (honor_info)
+        values (#{honorInfo})
+    </insert>
+
+    <update id="updateText" parameterType="com.cqupt.mislab.uhouse.model.Brand.Honor.HonorGet">
+        update honor_info
+        set honor_info=#{honorInfo}
+        where info_id=#{infoId}
+    </update>
+
+    <delete id="deleteText" parameterType="com.cqupt.mislab.uhouse.model.Brand.Honor.HonorGet">
+        delete
+        from honor_info
+        where info_id=#{infoId}
+    </delete>
+
+    <insert id="addImage" parameterType="com.cqupt.mislab.uhouse.model.Brand.Honor.HonorImageAdd" keyProperty="pictureId" useGeneratedKeys="true">
+        insert into honor_picture (picture_description,url)
+        values (#{pictureDescription},#{url})
+    </insert>
+
+    <delete id="deleteImage" parameterType="com.cqupt.mislab.uhouse.model.Brand.Honor.HonorImageAdd">
+        delete
+        from honor_picture
+        where picture_id=#{pictureId}
+    </delete>
+
+    <update id="updatePictureDescription" parameterType="com.cqupt.mislab.uhouse.model.Brand.Honor.HonorImageGet">
+        update honor_picture
+        set picture_description=#{pictureDescription}
+        where picture_id=#{pictureId}
+    </update>
+</mapper>

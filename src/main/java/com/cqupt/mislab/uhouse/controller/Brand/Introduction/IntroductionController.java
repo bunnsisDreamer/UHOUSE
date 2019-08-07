@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/introduction")
+@RequestMapping("/brand/introduction")
 public class IntroductionController {
 
     @Autowired
@@ -64,7 +64,7 @@ public class IntroductionController {
     public ResponseEntity<Object> updateText(IntroductionGet introductionGet){
         boolean flag=introductionService.updateText(introductionGet);
         if (flag)
-            return new ResponseEntity<>(ReturnCode.SUCCESS_CODE, Message.SUCCESS, null);
+            return new ResponseEntity<>(ReturnCode.SUCCESS_CODE, Message.UPDATE_SUCCESS, null);
         else
             return new ResponseEntity<>(ReturnCode.FAIL_CODE, Message.UPDATE_IS_FAIL, null);
     }
@@ -83,9 +83,9 @@ public class IntroductionController {
     public ResponseEntity<Object> addImage(IntroductionImageAdd introductionImageAdd){
         boolean flag=introductionService.addImage(introductionImageAdd);
         if(flag)
-            return new ResponseEntity<>(ReturnCode.SUCCESS_CODE, Message.SUCCESS,introductionImageAdd);
+            return new ResponseEntity<>(ReturnCode.SUCCESS_CODE, Message.ADD_SUCCESS,introductionImageAdd);
         else
-            return new ResponseEntity<>(ReturnCode.FAIL_CODE, Message.UPDATE_IS_FAIL, null);
+            return new ResponseEntity<>(ReturnCode.FAIL_CODE, Message.ADD_IS_FAIL, null);
     }
 
 
@@ -100,9 +100,9 @@ public class IntroductionController {
     public ResponseEntity<Object> deleteImage(IntroductionImageGet introductionImageGet){
         boolean flag=introductionService.deleteImage(introductionImageGet);
         if (flag)
-            return new ResponseEntity<>(ReturnCode.SUCCESS_CODE, Message.SUCCESS, null);
+            return new ResponseEntity<>(ReturnCode.SUCCESS_CODE, Message.DELETE_SUCCESS, null);
         else
-            return new ResponseEntity<>(ReturnCode.FAIL_CODE, Message.UPDATE_IS_FAIL, null);
+            return new ResponseEntity<>(ReturnCode.FAIL_CODE, Message.DELETE_IS_FAIL, null);
     }
 
 }
