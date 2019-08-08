@@ -7,6 +7,7 @@ public class Message {
     public static final String SUCCESS = "操作成功";
     public static final String LOGIN_IS_FAIL="登陆失败";
     public static final String UPDATE_IS_FAIL="修改失败";
+    public static final String FAIL="操作失败";
 
     public static final String ADD_SUCCESS = "添加成功";
     public static final String ADD_IS_FAIL = "添加失败";

@@ -1,22 +1,29 @@
 package com.cqupt.mislab.uhouse.model.Brand.Course;
 
-public class Course {
-    private int courseId;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import io.swagger.annotations.ApiParam;
+
+//展示历程信息
+@JsonIgnoreProperties(value = "projectId")
+public class CourseGet {
+    @ApiParam(hidden = true)
     private int projectId;
-    private String pageUrl;
+
+    @ApiParam(hidden = true)
     private int infoId;
+
+    @ApiParam(hidden = true)
     private String courseTime;
+
+    @ApiParam(hidden = true)
     private String courseTitle;
+
+    @ApiParam(hidden = true)
     private String courseInfo;
+
+    @ApiParam(hidden = true)
     private String courseUrl;
-
-    public int getCourseId() {
-        return courseId;
-    }
-
-    public void setCourseId(int courseId) {
-        this.courseId = courseId;
-    }
 
     public int getProjectId() {
         return projectId;
@@ -24,14 +31,6 @@ public class Course {
 
     public void setProjectId(int projectId) {
         this.projectId = projectId;
-    }
-
-    public String getPageUrl() {
-        return pageUrl;
-    }
-
-    public void setPageUrl(String pageUrl) {
-        this.pageUrl = pageUrl;
     }
 
     public int getInfoId() {

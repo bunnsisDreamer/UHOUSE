@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-/mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cqupt.mislab.uhouse.dao.Brand.Course.CourseMapper">
+
+    <resultMap id="CourseImageGet" type="com.cqupt.mislab.uhouse.model.Brand.Course.CourseImageGet">
+        <id column="course_id" property="courseId"/>
+        <result column="project_id" property="projectId"/>
+        <result column="pageUrl" property="pageUrl"/>
+    </resultMap>
+    <sql id="brand_course_image_get_clumns">
+        course_id,project_id,pageUrl
+    </sql>
+
+    <select id="findImageByProjectId" parameterType="java.lang.Integer" resultMap="CourseImageGet">
+        select pageUrl
+        from brand_course
+        where project_id=#{projectId}
+    </select>
+
+    <resultMap id="CourseGet" type="com.cqupt.mislab.uhouse.model.Brand.Course.CourseGet">
+        <id column="info_id" property="infoId"/>
+        <result column="project_id" property="projectId"/>
+        <result column="course_time" property="courseTime"/>
+        <result column="course_title" property="courseTitle"/>
+        <result column="course_info" property="courseInfo"/>
+        <result column="courseUrl" property="courseUrl"/>
+    </resultMap>
+    <sql id="brand_course_get_columns">
+        info_id,project_id,course_id,course_time,course_title,course_info,courseUrl
+    </sql>
+
+    <select id="findCourseByProjectId" parameterType="java.lang.Integer" resultMap="CourseGet">
+        select info_id,course_time,course_title,course_info,courseUrl
+        from course_info
+        where project_id=#{projectId}
+    </select>
+
+    <update id="updateImage" parameterType="com.cqupt.mislab.uhouse.model.Brand.Course.CourseImageGet">
+        update brand_course
+        set pageUrl=#{pageUrl}
+        where project_id=#{projectId}
+    </update>
+
+    <update id="updateCourse" parameterType="com.cqupt.mislab.uhouse.model.Brand.Course.CourseAdd">
+        update course_info
+        set course_time=#{courseTime},course_title=#{courseTitle},course_info=#{courseInfo},courseUrl=#{courseUrl}
+        where info_id=#{infoId}
+    </update>
+
+    <insert id="addCourse" parameterType="com.cqupt.mislab.uhouse.model.Brand.Course.CourseAdd" keyProperty="infoId" useGeneratedKeys="true">
+        insert into course_info (course_time,course_title,course_info,courseUrl)
+        values (#{courseTime},#{courseTitle},#{courseInfo},#{courseUrl})
+    </insert>
+
+    <delete id="deleteCourse" parameterType="com.cqupt.mislab.uhouse.model.Brand.Course.CourseAdd">
+        delete
+        from course_info
+        where info_id=#{infoId}
+    </delete>
+</mapper>

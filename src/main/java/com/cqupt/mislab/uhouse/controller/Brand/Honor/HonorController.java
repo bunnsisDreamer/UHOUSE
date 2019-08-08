@@ -72,41 +72,6 @@ public class HonorController {
     }
 
 
-    @ApiOperation(value = "品牌概括_品牌荣誉_修改荣誉接口",notes = "修改荣誉信息")
-    @ApiImplicitParams(
-            {
-                    @ApiImplicitParam(name = "projectId",value = "确定项目归属",required = true,paramType = "query"),
-                    @ApiImplicitParam(name = "infoId",value = "要修改的荣誉",required = true,paramType = "query"),
-                    @ApiImplicitParam(name = "honorInfo",value = "荣誉内容",required = true,paramType = "query")
-            }
-    )
-    @PostMapping("/update")
-    public ResponseEntity<Object> updateText(HonorGet honorGet){
-        boolean honor=honorService.updateText(honorGet);
-        if(honor)
-            return new ResponseEntity<>(ReturnCode.SUCCESS_CODE, Message.UPDATE_SUCCESS,honorGet);
-        else
-            return new ResponseEntity<>(ReturnCode.FAIL_CODE, Message.UPDATE_IS_FAIL,null);
-    }
-
-
-    @ApiOperation(value = "品牌概括_品牌荣誉_删除荣誉接口",notes = "删除荣誉信息")
-    @ApiImplicitParams(
-            {
-                    @ApiImplicitParam(name = "projectId",value = "确定项目归属",required = true,paramType = "query"),
-                    @ApiImplicitParam(name = "infoId",value = "要删除的荣誉",required = true,paramType = "query")
-            }
-    )
-    @DeleteMapping("/delete")
-    public ResponseEntity<Object> deleteText(HonorGet honorGet){
-        boolean honor=honorService.deleteText(honorGet);
-        if(honor)
-            return new ResponseEntity<>(ReturnCode.SUCCESS_CODE, Message.DELETE_SUCCESS,null);
-        else
-            return new ResponseEntity<>(ReturnCode.FAIL_CODE, Message.DELETE_IS_FAIL,null);
-    }
-
-
     @ApiOperation(value = "品牌概括_品牌荣誉_增加图片接口",notes = "增加图片")
     @ApiImplicitParams(
             {
@@ -125,20 +90,21 @@ public class HonorController {
     }
 
 
-    @ApiOperation(value = "品牌概括_品牌荣誉_删除图片接口",notes = "删除图片")
+    @ApiOperation(value = "品牌概括_品牌荣誉_修改荣誉接口",notes = "修改荣誉信息")
     @ApiImplicitParams(
             {
                     @ApiImplicitParam(name = "projectId",value = "确定项目归属",required = true,paramType = "query"),
-                    @ApiImplicitParam(name = "pictureId",value = "图片",required = true,paramType = "query"),
+                    @ApiImplicitParam(name = "infoId",value = "要修改的荣誉",required = true,paramType = "query"),
+                    @ApiImplicitParam(name = "honorInfo",value = "荣誉内容",required = true,paramType = "query")
             }
     )
-    @DeleteMapping("/image/delete")
-    public ResponseEntity<Object> deleteImage(HonorImageAdd honorImageAdd){
-        boolean honor=honorService.deleteImage(honorImageAdd);
+    @PostMapping("/update")
+    public ResponseEntity<Object> updateText(HonorGet honorGet){
+        boolean honor=honorService.updateText(honorGet);
         if(honor)
-            return new ResponseEntity<>(ReturnCode.SUCCESS_CODE, Message.DELETE_SUCCESS,null);
+            return new ResponseEntity<>(ReturnCode.SUCCESS_CODE, Message.UPDATE_SUCCESS,honorGet);
         else
-            return new ResponseEntity<>(ReturnCode.FAIL_CODE, Message.DELETE_IS_FAIL,null);
+            return new ResponseEntity<>(ReturnCode.FAIL_CODE, Message.UPDATE_IS_FAIL,null);
     }
 
     @ApiOperation(value = "品牌概括_品牌荣誉_修改图片描述接口",notes = "修改图片描述")
@@ -159,6 +125,37 @@ public class HonorController {
     }
 
 
+
+    @ApiOperation(value = "品牌概括_品牌荣誉_删除荣誉接口",notes = "删除荣誉信息")
+    @ApiImplicitParams(
+            {
+                    @ApiImplicitParam(name = "projectId",value = "确定项目归属",required = true,paramType = "query"),
+                    @ApiImplicitParam(name = "infoId",value = "要删除的荣誉",required = true,paramType = "query")
+            }
+    )
+    @DeleteMapping("/delete")
+    public ResponseEntity<Object> deleteText(HonorGet honorGet){
+        boolean honor=honorService.deleteText(honorGet);
+        if(honor)
+            return new ResponseEntity<>(ReturnCode.SUCCESS_CODE, Message.DELETE_SUCCESS,null);
+        else
+            return new ResponseEntity<>(ReturnCode.FAIL_CODE, Message.DELETE_IS_FAIL,null);
+    }
+    @ApiOperation(value = "品牌概括_品牌荣誉_删除图片接口",notes = "删除图片")
+    @ApiImplicitParams(
+            {
+                    @ApiImplicitParam(name = "projectId",value = "确定项目归属",required = true,paramType = "query"),
+                    @ApiImplicitParam(name = "pictureId",value = "图片",required = true,paramType = "query"),
+            }
+    )
+    @DeleteMapping("/image/delete")
+    public ResponseEntity<Object> deleteImage(HonorImageAdd honorImageAdd){
+        boolean honor=honorService.deleteImage(honorImageAdd);
+        if(honor)
+            return new ResponseEntity<>(ReturnCode.SUCCESS_CODE, Message.DELETE_SUCCESS,null);
+        else
+            return new ResponseEntity<>(ReturnCode.FAIL_CODE, Message.DELETE_IS_FAIL,null);
+    }
 
 
 }
