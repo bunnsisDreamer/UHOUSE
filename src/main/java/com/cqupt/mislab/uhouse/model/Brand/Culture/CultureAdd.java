@@ -1,21 +1,22 @@
 package com.cqupt.mislab.uhouse.model.Brand.Culture;
 
-public class Culture {
-    private int cultureId;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import io.swagger.annotations.ApiParam;
+
+//用于增加、修改、删除文化内容
+@JsonIgnoreProperties(value = {"projectId","cultureTitle","cultureInfo"})
+public class CultureAdd {
+    @ApiParam(hidden = true)
     private int projectId;
-    private String pageUrl;
-    private String cultureUrl;
+
+    @ApiParam(hidden = true)
     private int infoId;
+
+    @ApiParam(hidden = true)
     private String cultureTitle;
+
+    @ApiParam(hidden = true)
     private String cultureInfo;
-
-    public int getCultureId() {
-        return cultureId;
-    }
-
-    public void setCultureId(int cultureId) {
-        this.cultureId = cultureId;
-    }
 
     public int getProjectId() {
         return projectId;
@@ -23,22 +24,6 @@ public class Culture {
 
     public void setProjectId(int projectId) {
         this.projectId = projectId;
-    }
-
-    public String getPageUrl() {
-        return pageUrl;
-    }
-
-    public void setPageUrl(String pageUrl) {
-        this.pageUrl = pageUrl;
-    }
-
-    public String getCultureUrl() {
-        return cultureUrl;
-    }
-
-    public void setCultureUrl(String cultureUrl) {
-        this.cultureUrl = cultureUrl;
     }
 
     public int getInfoId() {

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-/mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cqupt.mislab.uhouse.dao.Brand.Culture.CultureMapper">
+    <resultMap id="CultureImageGet" type="com.cqupt.mislab.uhouse.model.Brand.Culture.CultureImageGet">
+        <id column="project_id" property="projectId"/>
+        <result column="culture_id" property="cultureId"/>
+        <result column="pageUrl" property="pageUrl"/>
+        <result column="cultureUrl" property="cultureUrl"/>
+    </resultMap>
+    <sql id="brand_culture_image_get_columns">
+        project_id.culture_id,pageUrl,cultureUrl
+    </sql>
+
+    <select id="findImageByProjectId" parameterType="java.lang.Integer" resultMap="CultureImageGet">
+        select pageUrl,cultureUrl
+        from brand_culture
+        where project_id=#{projectId}
+    </select>
+
+    <resultMap id="CultureGet" type="com.cqupt.mislab.uhouse.model.Brand.Culture.CultureGet">
+        <id column="info_id" property="infoId"/>
+        <result column="project_id" property="projectId"/>
+        <result column="culture_title" property="cultureTitle"/>
+        <result column="culture_info" property="cultureInfo"/>
+    </resultMap>
+    <sql id="culture_info_get_columns">
+        info_id.project_id,culture_title,culture_info
+    </sql>
+
+    <select id="findCultureByProjectId" parameterType="java.lang.Integer" resultMap="CultureGet">
+        select info_id,culture_title,culture_info
+        from culture_info
+        where project_id=#{projectId}
+    </select>
+
+    <update id="updateImage" parameterType="com.cqupt.mislab.uhouse.model.Brand.Culture.CultureImageGet">
+        update brand_culture
+        set pageUrl=#{pageUrl},cultureUrl=#{cultureUrl}
+    </update>
+
+    <update id="updateCulture" parameterType="com.cqupt.mislab.uhouse.model.Brand.Culture.CultureAdd">
+        update culture_info
+        set culture_title=#{cultureTitle},culture_info=#{cultureInfo}
+        where info_id=#{infoId}
+    </update>
+
+    <insert id="addCulture" parameterType="com.cqupt.mislab.uhouse.model.Brand.Culture.CultureAdd" keyProperty="infoId" useGeneratedKeys="true">
+        insert into culture_info (culture_title,culture_info)
+        values (#{cultureTitle},#{cultureInfo})
+    </insert>
+
+    <delete id="deleteCulture" parameterType="com.cqupt.mislab.uhouse.model.Brand.Culture.CultureAdd">
+        delete
+        from culture_info
+        where info_id=#{infoId}
+    </delete>
+</mapper>
