@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cqupt.mislab.uhouse.dao.ManageMapper">
+    <resultMap id="project" type="com.cqupt.mislab.uhouse.model.project.ProjectBasic">
+        <id column="projectId" property="project_id"/>
+        <result column="projectName" property="project_name"/>
+        <result column="basicInform" property="basic_information"/>
+        <result column="phoneNum" property="phone_number"/>
+        <result column="description" property="description"/>
+        <result column="QR_codeUrl" property="QR_codeUrl"/>
+    </resultMap>
+    <sql id="project_manage_get_columns">
+        project_id,project_name,basic_information,phone_number,description,QR_codeUrl
+    </sql>
+    <select id="findAllProject" parameterType="java.lang.String" resultMap="project">
+        select <include refid="project_manage_get_columns"/>
+        from project_manage
+    </select>
+    <select id="findProjectByProjectName" parameterType="java.lang.String" resultMap="project">
+        select *
+        from project_manage
+        where project_name=#{projectName}
+    </select>
+    <update id="updateProject" parameterType="com.cqupt.mislab.uhouse.model.project.ProjectBasic">
+        update project_manage
+        set project_manage.basic_information=#{basicInform},
+            project_manage.phone_number=#{phoneNum},
+            project_manage.description=#{description},
+            project_manage.QR_codeUrl=#{QR_codeUrl}
+        where project_name=#{projectName}
+    </update>
+    <insert id="addProject" parameterType="com.cqupt.mislab.uhouse.model.project.ProjectBasic" keyProperty="project_name" useGeneratedKeys="true" >
+        insert into project_manage(project_id, project_name, basic_information, phone_number, description, QR_codeUrl)
+        VALUES (#{projectId},#{projectName},#{basicInform},#{phoneNum},#{description},#{QR_codeUrl})
+    </insert>
+</mapper>
